@@ -1,15 +1,14 @@
 ---
-- name: Configure Cisco Router
+- name: Configure Router
   hosts: router1
   gather_facts: no
   tasks:
-    - name: Ensure hostname is configured
+    - name: Make sure the hostname is set up
       ios_config:
         lines:
-          - hostname Router1
-      when: ansible_net_model == "CSR1000V"
+          - hostname router2
 
-    - name: Configure GigabitEthernet1 interface
+    - name: Configure the interface GigabitEthernet1
       ios_config:
         lines:
           - interface GigabitEthernet1
@@ -20,12 +19,9 @@
           - interface GigabitEthernet1
         after:
           - exit
-      when: ansible_net_model == "CSR1000V
+    
 
     - name: Save configuration
       ios_command:
         commands:
           - write memory
-      when: ansible_net_model == "CSR1000V
-
-
