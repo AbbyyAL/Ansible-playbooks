@@ -2,17 +2,17 @@
 
 # Update and install required packages
 
-apt update && apt install -y python3 python3-pip telnet vim
+sudo apt update && apt install -y python3 python3-pip telnet vim
 
 # Install Python packages
 
-pip3 install ansible ansible-pylibssh
+sudo pip3 install ansible ansible-pylibssh
 
-docker exec -it clab-firstlab-csr-r1 bash -c 'apt update && apt install -y python3-pip telnet vim && pip3 install ansible ansible-pylibssh'
+sudo docker exec -it clab-firstlab-csr-r1 bash -c 'apt update && apt install -y python3-pip telnet vim && pip3 install ansible ansible-pylibssh'
 
 # Create ansible.cfg in /
 
-docker exec -it clab-firstlab-csr-r1 bash -c 'cat <<EOF > /ansible.cfg
+sudo docker exec -it clab-firstlab-csr-r1 bash -c 'cat <<EOF > /ansible.cfg
 
 [defaults]
 
@@ -38,7 +38,7 @@ EOF'
 
 # Create inventory.yml in /
 
-docker exec -it clab-firstlab-csr-r1 bash -c 'cat <<EOF > /inventory.yml
+sudo docker exec -it clab-firstlab-csr-r1 bash -c 'cat <<EOF > /inventory.yml
 
 all:
 
@@ -64,7 +64,7 @@ EOF'
 
 # Create configure_router.yml in /
 
-docker exec -it clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure_router.yml
+sudo docker exec -it clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure_router.yml
 
 - name: Configure Router
 
@@ -106,4 +106,4 @@ EOF'
 
 # Run Ansible playbook
 
-docker exec -it clab-firstlab-csr-r1 bash -c "ansible-playbook -i /inventory.yml /configure_router.yml"
+sudo docker exec -it clab-firstlab-csr-r1 bash -c "ansible-playbook -i /inventory.yml /configure_router.yml"
