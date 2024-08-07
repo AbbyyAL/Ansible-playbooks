@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Run Ansible Playbook') {
             steps {
-                sh './configure_router.sh'
+                sh 'sudo ./configure_router.sh'
             }
         }
     }
