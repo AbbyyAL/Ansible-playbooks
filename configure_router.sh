@@ -7,10 +7,10 @@ sudo apt update && sudo apt install -y python3 python3-pip telnet vim
 sudo pip3 install ansible ansible-pylibssh
 
 # Install Python packages inside the Docker container
-sudo docker exec -i -T -u root clab-firstlab-csr-r1 bash -c 'apt update && apt install -y python3-pip telnet vim && pip3 install ansible ansible-pylibssh'
+sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'apt update && apt install -y python3-pip telnet vim && pip3 install ansible ansible-pylibssh'
 
 # Create ansible.cfg in the Docker container
-sudo docker exec -i -T -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /ansible.cfg
+sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /ansible.cfg
 [defaults]
 inventory = /inventory.yml
 host_key_checking = False
@@ -23,7 +23,7 @@ transport = network_cli
 EOF'
 
 # Create inventory.yml in the Docker container
-sudo docker exec -i -T -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /inventory.yml
+sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /inventory.yml
 all:
   hosts:
     csr1000v:
@@ -37,7 +37,7 @@ all:
 EOF'
 
 # Create configure_router.yml in the Docker container
-sudo docker exec -i -T -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure_router.yml
+sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure_router.yml
 - name: Configure Router
   hosts: csr1000v
   gather_facts: no
@@ -59,4 +59,4 @@ sudo docker exec -i -T -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /config
 EOF'
 
 # Run the Ansible playbook
-sudo docker exec -i -T -u root clab-firstlab-csr-r1 bash -c "ansible-playbook -i /inventory.yml /configure_router.yml"
+sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c "ansible-playbook -i /inventory.yml /configure_router.yml"
