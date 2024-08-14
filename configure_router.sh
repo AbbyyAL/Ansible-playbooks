@@ -1,14 +1,14 @@
 #!/bin/bash
-
+ 
 # Update and install required packages
 sudo apt update && sudo apt install -y python3 python3-pip telnet vim
-
+ 
 # Install Python packages
 sudo pip3 install ansible ansible-pylibssh
-
+ 
 # Install Python packages inside the Docker container
 sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'apt update && apt install -y python3-pip telnet vim && pip3 install ansible ansible-pylibssh'
-
+ 
 # Create ansible.cfg in the Docker container
 sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /ansible.cfg
 [defaults]
@@ -21,7 +21,7 @@ become_method = enable
 [ssh_connection]
 transport = network_cli
 EOF'
-
+ 
 # Create inventory.yml in the Docker container
 sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /inventory.yml
 all:
@@ -35,7 +35,7 @@ all:
       ansible_become: yes
       ansible_become_method: enable
 EOF'
-
+ 
 # Create configure_router.yml in the Docker container
 sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure_router.yml
 - name: Configure Router
@@ -46,7 +46,7 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
     - name: Set hostname
       ios_config:
         lines:
-          - hostname abigail
+          - hostname yanyanhafeezah
     - name: Ensure SSH is enabled
       ios_config:
         lines:
@@ -57,6 +57,6 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
           - transport input ssh
           - login local
 EOF'
-
+ 
 # Run the Ansible playbook
 sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c "ansible-playbook -i /inventory.yml /configure_router.yml"
