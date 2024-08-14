@@ -5,6 +5,9 @@ sudo apt update && sudo apt install -y python3 python3-pip telnet vim
  
 # Install Python packages
 sudo pip3 install ansible ansible-pylibssh
+
+# Ensure Ansible is in the PATH
+export PATH=$PATH:/usr/local/bin
  
 # Install Python packages inside the Docker container
 sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'apt update && apt install -y python3-pip telnet vim && pip3 install ansible ansible-pylibssh'
