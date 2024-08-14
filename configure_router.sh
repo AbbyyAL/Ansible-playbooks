@@ -56,10 +56,10 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
           - line vty 0 4
           - transport input ssh
           - login local     
-    - name: Configure interface GigabitEthernet4
+    - name: Configure interface GigabitEthernet1
       ios_config:
         lines:
-          - interface GigabitEthernet4
+          - interface GigabitEthernet1
           - ip address 192.168.3.1 255.255.255.0
           - no shutdown
 EOF'
