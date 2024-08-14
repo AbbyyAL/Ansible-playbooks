@@ -60,6 +60,7 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
       ios_config:
         lines:
           - interface GigabitEthernet1
+          - no ip address
           - ip address 192.168.3.1 255.255.255.0
           - no shutdown
 EOF'
