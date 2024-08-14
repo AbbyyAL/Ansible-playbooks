@@ -57,7 +57,7 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
           - transport input ssh
           - login local
 
-      - name: Configure interface GigabitEthernet4
+     - name: Configure interface GigabitEthernet4
         ios_config:
           lines:
             - interface GigabitEthernet4
