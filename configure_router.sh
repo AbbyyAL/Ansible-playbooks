@@ -66,7 +66,7 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
     - name: Configure interface GigabitEthernet3 - P2
       ios_config:
         lines:
-          - ip address 192.168.3.1 255.255.255.0
+          - ip address 192.168.2.1 255.255.255.0
           - no shutdown
         parents:
           - interface GigabitEthernet3
