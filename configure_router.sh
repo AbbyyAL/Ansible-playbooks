@@ -46,7 +46,7 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
     - name: Set hostname
       ios_config:
         lines:
-          - hostname abigail
+          - hostname yy
     - name: Ensure SSH is enabled
       ios_config:
         lines:
