@@ -46,7 +46,7 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
     - name: Set hostname
       ios_config:
         lines:
-          - hostname yy
+          - hostname yyy
     - name: Ensure SSH is enabled
       ios_config:
         lines:
@@ -56,14 +56,23 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
           - line vty 0 4
           - transport input ssh
           - login local 
+
+    - name: Configure interface GigabitEthernet2 - P1
+      ios_config:
+        lines:
+          - interface GigabitEthernet2
+          - no ip address
+        parents:
+          - interface GigabitEthernet2
     
     - name: Configure interface GigabitEthernet2 - P2
       ios_config:
         lines:
-          - ip address 192.168.1.1 255.255.255.0
+          - ip address 192.168.1.2 255.255.255.0
           - no shutdown
         parents:
           - interface GigabitEthernet2
+          
     - name: Configure interface GigabitEthernet3 - P1
       ios_config:
         lines:
@@ -74,7 +83,7 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
     - name: Configure interface GigabitEthernet3 - P2
       ios_config:
         lines:
-          - ip address 192.168.2.2 255.255.255.0
+          - ip address 192.168.2.3 255.255.255.0
           - no shutdown
         parents:
           - interface GigabitEthernet3
