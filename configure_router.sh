@@ -55,7 +55,15 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
           - ip ssh version 2
           - line vty 0 4
           - transport input ssh
-          - login local     
+          - login local 
+    
+    - name: Configure interface GigabitEthernet2 - P2
+      ios_config:
+        lines:
+          - ip address 192.168.1.1 255.255.255.0
+          - no shutdown
+        parents:
+          - interface GigabitEthernet2
     - name: Configure interface GigabitEthernet3 - P1
       ios_config:
         lines:
@@ -66,10 +74,15 @@ sudo docker exec -i -u root clab-firstlab-csr-r1 bash -c 'cat <<EOF > /configure
     - name: Configure interface GigabitEthernet3 - P2
       ios_config:
         lines:
-          - ip address 192.168.2.3 255.255.255.0
+          - ip address 192.168.2.2 255.255.255.0
           - no shutdown
         parents:
           - interface GigabitEthernet3
+    - name: Configure ip route
+      ios_config:
+        lines:
+          - ip route 192.168.1.0 255.255.255.0 Gi2
+          - ip route 192.168.2.0 255.255.255.0 Gi3
 EOF'
  
 # Run the Ansible playbook
